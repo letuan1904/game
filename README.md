@@ -107,6 +107,49 @@ Hãy thử thách bản thân và xem bạn có thể đạt được điểm s�
 <img width="552" alt="Screenshot 2024-08-18 at 14 46 13" src="https://github.com/user-attachments/assets/e3c86daa-1f96-4290-8a0c-eb657391875f">.<br>
 ## đây là giao diện thua cuộc , khi bạn đã lấp đầy màn hình chơi ( các khối chạm và biên giới trên cùng của màn hình chơi ).<br>  
 ## tới đây , nếu bạn muốn quay trở lại bảng chọn ban đầu , hãy ấn ( SPACE )
+## Các hàm chính và chứng năng của chúng 
+# Mô Tả Chức Năng của Các Hàm
+
+Dưới đây là mô tả chi tiết chức năng của từng hàm trong mã nguồn của bạn:
+
+## 1. `bool init()`
+- **Chức năng**: Khởi tạo SDL và các thành phần cần thiết cho trò chơi.
+- **Chi tiết**:
+  - Khởi tạo thư viện SDL (`SDL_Init`).
+  - Tạo một cửa sổ SDL với kích thước xác định và thuộc tính hiển thị (`SDL_CreateWindow`).
+  - Tạo một renderer SDL với khả năng tăng tốc phần cứng (`SDL_CreateRenderer`).
+  - Khởi tạo thư viện SDL_ttf cho việc xử lý phông chữ (`TTF_Init`).
+- **Trả về**: `true` nếu khởi tạo thành công, `false` nếu có lỗi xảy ra.
+
+## 2. `void close()`
+- **Chức năng**: Dọn dẹp các tài nguyên và kết thúc trò chơi.
+- **Chi tiết**:
+  - Giải phóng các texture đã tải (`free`).
+  - Đặt lại các con trỏ phông chữ và renderer về `NULL`.
+  - Phá hủy renderer và cửa sổ (`SDL_DestroyRenderer`, `SDL_DestroyWindow`).
+  - Đóng thư viện SDL_ttf và SDL (`TTF_Quit`, `SDL_Quit`).
+- **Trả về**: Không có giá trị trả về. Chỉ thực hiện các bước dọn dẹp.
+
+## 3. `int main(int argc, char *argv[])`
+- **Chức năng**: Điểm vào chính của chương trình, xử lý trạng thái trò chơi và thực thi vòng lặp trò chơi.
+- **Chi tiết**:
+  - Khởi tạo các đối tượng `Tetromino` cho khối hiện tại và khối tiếp theo.
+  - Gọi hàm `init` để khởi tạo SDL và các tài nguyên.
+  - Tải phông chữ, hình nền và các văn bản cần thiết.
+  - Vòng lặp chính:
+    - Xử lý sự kiện từ người dùng trong menu và trò chơi.
+    - Trong menu, cho phép người chơi bắt đầu trò chơi hoặc thoát.
+    - Trong trò chơi, xử lý di chuyển và xoay khối tetromino, kiểm tra va chạm, cập nhật điểm số, và vẽ các đối tượng.
+    - Kiểm tra thời gian di chuyển khối và xử lý các tình huống kết thúc trò chơi.
+  - Cuối cùng, gọi hàm `close` để dọn dẹp tài nguyên và kết thúc trò chơi.
+- **Trả về**: Trả về 0 khi kết thúc.
+
+## 4. `bool start = false;`, `bool PLAY = true;`, `bool EXIT = false;`, `bool isRunning = true;`
+- **Chức năng**: Các biến toàn cục để theo dõi trạng thái của trò chơi và menu.
+
+## 5. `SDL_Window* Window = NULL;`, `SDL_Renderer* Renderer = NULL;`, `Texture background, tScore, score, tLine, line, tBest, best, menu;`, `Texture gameOver;`, `Texture tNext;`, `TTF_Font *font = NULL, *eFont = NULL;`
+- **Chức năng**: Các biến toàn cục để lưu trữ con trỏ đến cửa sổ, renderer, textures, và phông chữ.
+
 
 
 
